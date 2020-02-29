@@ -7,6 +7,12 @@
 class Validation
 {
 
+	public const LIMIT    	        = 100;
+	public const TERMINATION_CODE    = 99;
+
+	private const NOT_INT_ENTRY    			= "Your input is invalid for: ";
+	private const INVALID_OP_CODE 			= "Something went wrong. Opcode must be 1 or 2!";
+
 
 	// @var string
 	private $userInput;
@@ -45,6 +51,18 @@ class Validation
 			return $this->isInteger();
 		}				
 
+
+		// Check whether there is enough intcode (at least 5)
+		if ( !empty($this->isThereEnoughIntCode()) ){
+			return $this->isThereEnoughIntCode();
+		}
+
+		// Check all numbers are smaller than limit (100)
+		if ( !empty($this->isSmallerThanLimit()) ){
+			return $this->isSmallerThanLimit();
+		}	
+
+
 		return [];
 	}
 
@@ -66,6 +84,32 @@ class Validation
 		return $errorMsgs;
 	}
 
+		/**
+	* Check whether there is enough intcode 
+	*  ( > 5in) the user input
+	*/
+	private function isThereEnoughIntCode()
+	{
+		$errorMsgs = [];
+		if(count($this->intCodes) < 5) {
+			$errorMsgs[]	= 'At least 5 numbers needed in your Intcode program entry!';
+		}
+		return $errorMsgs;
+	}	
+
+	/**
+	* Check all numbers are smaller than limit (100) 
+	*/
+	private function isSmallerThanLimit()
+	{
+		$errorMsgs = [];
+		foreach ($this->intCodes as $key => $code) {
+			if ($code >= self::LIMIT){
+				$errorMsgs[] = $code . ' is greater than "' . self::LIMIT . '"';
+			}
+		}
+		return $errorMsgs;
+	}
 
 }
 
