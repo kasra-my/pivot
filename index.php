@@ -1,7 +1,8 @@
 <?php
    require_once('includes/header.php');
-?>
+   require_once('Validation.php');
 
+?>
 		<div class="container">
 		  <div class="row">
 		    <div class="col-sm">
@@ -24,7 +25,8 @@
 				  <div class="form-group">
 				  	<div class="col-xs-3">
 					    <label for="exampleInputEmail1">Please enter the Intcode program: </label>
-					    <input type="text" class="form-control" name="intcode" placeholder='Enter your IntCode'>
+						<?php isset($_POST['intcode'])? $placeHolder = $_POST['intcode'] : $placeHolder = 'Enter Intcode Program' ?>
+					    <input type="text" class="form-control" name="intcode" placeholder='<?php echo 'Your last input: ' . $placeHolder; ?>'>
 					</div>
 				  </div>
 
@@ -42,13 +44,26 @@
 				if(isset($_POST['intcode'])){ 
 				  	$userInput        = $_POST['intcode']; 
 
-					var_dump($userInput);
+					$validator        = new Validation($userInput);
+					$validationErrors = $validator->validate();
+				
+					print_r($validationErrors);
+
 				}  
 
 			?>
 
 		</div>
 
-	<?php
-	require_once('includes/footer.php');
-	?>			
+
+
+
+
+
+
+
+
+<?php
+require_once('includes/footer.php');
+
+?>
