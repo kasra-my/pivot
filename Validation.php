@@ -188,16 +188,7 @@ class Validation
 		$chunkOfFour = array_chunk($beforeHaltCode, 4);
 
 		foreach ($chunkOfFour as $key => $chunk) {
-			// if (isset($chunk[1]) && $chunk[1] > $countOfIntcodes){
 
-			// 	$errorMsgs[] = 'The position of "' . $chunk[1] . '" is not available in your given intcodes!';
-
-			// }
-			// if ( isset($chunk[2]) && $chunk[2] > $countOfIntcodes){
-
-			// 	$errorMsgs[] = 'The position of "' . $chunk[2] . '" is not available in your given intcodes!';
-
-			// }
 			if (isset($chunk[3]) && $chunk[3] > $countOfIntcodes){
 
 				$errorMsgs[] = 'The position of "' . $chunk[3] . '" is not available in your given intcodes!';

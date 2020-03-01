@@ -6,16 +6,14 @@
 ?>
 		<div class="container">
 		  <div class="row">
-		    <div class="col-sm">
-		    	<ul>
-					<li> Get the user input </li>
-					<li> Validate the user input </li>
-					<li> If everything is okay, then analyze the commands </li>
-					<li> Do the calculation </li>
-					<li> Display the results </li>
-				</ul>
-
-		    </div>
+			<h1>Code challeng - Pivot Professional Learning</h1>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		  </div>
 		</div>
 
