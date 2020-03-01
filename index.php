@@ -1,6 +1,7 @@
 <?php
    require_once('includes/header.php');
    require_once('Validation.php');
+   require_once('GravityAssist.php');
 
 ?>
 		<div class="container">
@@ -24,9 +25,9 @@
 				<form action="" method="POST">
 				  <div class="form-group">
 				  	<div class="col-xs-3">
-					    <label for="exampleInputEmail1">Please enter the Intcode program: </label>
+					    <label for="intcode">Please enter the Intcode program: </label>
 						<?php isset($_POST['intcode'])? $placeHolder = $_POST['intcode'] : $placeHolder = 'Enter Intcode Program' ?>
-					    <input type="text" class="form-control" name="intcode" placeholder='<?php echo 'Your last input: ' . $placeHolder; ?>'>
+					    <input type="text" class="form-control" name="intcode" id="intcode" placeholder='<?php echo 'Your last input: ' . $placeHolder; ?>'>
 					</div>
 				  </div>
 
@@ -46,8 +47,23 @@
 
 					$validator        = new Validation($userInput);
 					$validationErrors = $validator->validate();
-				
-					print_r($validationErrors);
+					
+					if (empty($validationErrors)){
+						$gravityAssist = new GravityAssist();
+
+					} else {
+						
+						// Display all error messages here:
+						echo "<ul>";
+
+						foreach ($validationErrors as $key => $error) {
+							echo '<li class="list-group-item list-group-item-danger">';
+							echo $error;
+							echo '</li>';
+						}
+
+						echo "</ul>";
+					}
 
 				}  
 
