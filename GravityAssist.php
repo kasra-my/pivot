@@ -7,7 +7,6 @@ require_once('HaltCodePosition.php');
 /**
 * This class is to do all calculations
 */
-
 class GravityAssist
 {
 	use HaltCodePosition;
@@ -51,7 +50,6 @@ class GravityAssist
 				$this->operate($chunk);
 			}
 		}
-		return $this->intCodes;
 	}
 
 	/**
@@ -69,6 +67,14 @@ class GravityAssist
 		return $intCodes;
 	}
 
+	/** 
+	* Slice intcode array and eturns all values until haltcode
+	* @return array
+	*/
+	private function sliceArray()
+	{
+		return array_slice($this->intCodes, 0, $this->haltCodePosition);     
+	}
 
 	/**
 	* If the results will not be invalid, then
@@ -91,6 +97,17 @@ class GravityAssist
 			}
 		}
 	}
+
+	/**
+	*
+	* Print the result
+	*@return string
+	*/
+	public function report(): string
+	{
+		return json_encode($this->intCodes);
+	}
+
 
 }
 

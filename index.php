@@ -50,10 +50,13 @@
 					
 					if (empty($validationErrors)){
 						$gravityAssist = new GravityAssist($userInput);
-						var_dump($gravityAssist->process() );
+						$gravityAssist->process();
+
+						echo '<div style="background-color:#0CA73A; padding: 5px; font-weight:bold;">' . Validation::INVALID_OPERATTIONS . '</div><br><br>';
+						echo '<div style="color:blue; padding: 5px; font-weight:bold;">The new result is: ' . str_replace('"', "", $gravityAssist->report());
+
 
 					} else {
-						
 						// Display all error messages here:
 						echo "<ul>";
 
