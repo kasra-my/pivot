@@ -1,5 +1,7 @@
 <?php
 
+require_once('HaltCodePosition.php');
+
 /**
 *
 * This class is for validating user Intcode program inputs
@@ -7,11 +9,13 @@
 class Validation
 {
 
+	use HaltCodePosition;
+
 	public const LIMIT    	        = 100;
 	public const TERMINATION_CODE    = 99;
 
 	private const NOT_INT_ENTRY    			= "Your input is invalid for: ";
-	private const INVALID_OP_CODE 			= "Something went wrong. Opcode must be 1 or 2!";
+	private const INVALID_OP_CODE 			= "Something went wrong. Opcode must be 1, 2 or 99!";
 
 
 	public const INVALID_OPERATTIONS		= "Please notice operations that end of with invalid results are ignored so you will see the same thing as you entered. For example, if the result of add/multiple is greater than the Intcode array count, it will be ignored because that index key is not available! Also, the halt code value (99) will never overwritten!";
@@ -175,7 +179,7 @@ class Validation
 		$countOfIntcodes = count($this->intCodes);
 		$errorMsgs =[];
 
-		$haltCodePosition = $this->getHaltCodePosition();
+		$haltCodePosition = $this->getHaltCodePosition($this->intCodes, Validation::TERMINATION_CODE);
 		
 		// Only the position of intcodes before halt code (99) needs to be validated
 		$beforeHaltCode = array_slice($this->intCodes, 0, $haltCodePosition);
@@ -203,22 +207,6 @@ class Validation
 		return $errorMsgs;
 	}
 
-	/**
-	* Get the key of the halt code (99) in the intcode array
-	* @return int
-	*/
-	private function getHaltCodePosition(): int
-	{
-		foreach ($this->intCodes as $key => $code) {
-
-			if ($code == self::TERMINATION_CODE){
-
-				return $key;
-
-			}
-
-		}
-	}
 
 
 }

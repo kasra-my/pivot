@@ -49,7 +49,8 @@
 					$validationErrors = $validator->validate();
 					
 					if (empty($validationErrors)){
-						$gravityAssist = new GravityAssist();
+						$gravityAssist = new GravityAssist($userInput);
+						var_dump($gravityAssist->process() );
 
 					} else {
 						
