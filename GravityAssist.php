@@ -87,13 +87,13 @@ class GravityAssist
 		$countIntCodes = count($this->intCodes);
 		// add
 		if ($chunk[0] == 1){
-			if ( ($chunk[1] + $chunk[2]) < $countIntCodes){
-				$this->intCodes[$chunk[3]] = $chunk[1] + $chunk[2];
+			if ( (int)$chunk[3] < $countIntCodes){
+				$this->intCodes[(int)$chunk[3]] = (int)$chunk[1] + (int)$chunk[2];
 			}
 		// multiple
 		}else {
-			if (  ((int)$chunk[1] * (int)$chunk[2] ) < $countIntCodes){
-				$this->intCodes[$chunk[3]] = (int)$chunk[1] * (int)$chunk[2];
+			if ( (int)$chunk[3] < $countIntCodes){
+				$this->intCodes[(int)$chunk[3]] = (int)$chunk[1] * (int)$chunk[2];
 			}
 		}
 	}
