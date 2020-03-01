@@ -40,10 +40,10 @@ class GravityAssist
 	*/
 	public function process()
 	{
-		// Divide intCode array to chunks of 4
-		$chunkOfFour = array_chunk($this->sliceArray(), 4);
 
-		foreach ($chunkOfFour as $key => $chunk) {
+		for ($i=0; $i < $this->getChunkCount() ; $i++) { 
+
+			$chunk = $this->getChunk($i);
 
 			// New values cannot be stored on the position of halt code (99)
 			if(isset($chunk[3]) && $chunk[3] != $this->haltCodePosition){
@@ -67,6 +67,27 @@ class GravityAssist
 		return $intCodes;
 	}
 
+
+	/**
+	* Returns the number of chunks of four, for the intCodes
+	* @return int 
+	*/
+	private function getChunkCount(): int
+	{
+		return count(array_chunk($this->sliceArray($this->intCodes), 4));	
+	}
+
+	/**
+	* @param int $chunkKey
+	* @return array
+	*/
+	private function getChunk(int $chunkKey)
+	{
+		$chunkOfFour = array_chunk($this->sliceArray(), 4);
+		return $chunkOfFour[$chunkKey];
+	}
+
+
 	/** 
 	* Slice intcode array and eturns all values until haltcode
 	* @return array
@@ -82,7 +103,7 @@ class GravityAssist
 	*
 	*@param array $chunk
 	*/
-	private function operate(array $chunk): void
+	private function operate(array &$chunk): void
 	{
 		$countIntCodes = count($this->intCodes);
 		// add
